@@ -1,16 +1,19 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Component } from "react";
+
+import { Searchbar } from "./ PixabayAPI/Searchbar/Searchbar";
+
+class App extends Component {
+  state = {
+    queryName: "",
+  };
+
+  handleSubmit = (queryName) => {
+    this.setState({ queryName: queryName });
+  };
+
+  render() {
+    return <Searchbar onSubmit={this.handleSubmit} />;
+  }
+}
+
+export { App };
