@@ -1,0 +1,16 @@
+.LoadMoreBtn {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(43, 77, 229);
+  color: #ffff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 16px;
+}

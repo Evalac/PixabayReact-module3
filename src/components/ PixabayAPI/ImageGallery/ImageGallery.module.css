@@ -1,0 +1,8 @@
+@import-normalize;
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки рівної ширини */
+  gap: 16px; /* Відступи між елементами */
+  margin-bottom: 16px;
+}
