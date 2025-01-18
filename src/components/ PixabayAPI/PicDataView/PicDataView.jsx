@@ -6,7 +6,7 @@ import { Button } from "../Button/Button";
 
 class PicDataView extends Component {
   state = {
-    dataPic: [],
+    dataPic: null,
     error: null,
     status: "idle",
     page: 1,
@@ -25,14 +25,32 @@ class PicDataView extends Component {
           if (resp.ok) {
             return resp.json();
           }
-          return Promise.reject(new Error("Щось пішло не так"));
+          return Promise.reject(new Error("Ой щось пішлоо не так"));
         })
         .then((data) => {
-          console.log(data);
+          console.log(data.hits);
 
-          return this.setState({ dataPic: data, status: "resolved" });
+          // Якщо змінилася сторінка (Load more), додаємо нові дані
+          if (prevState.page !== this.state.page) {
+            console.log("сторінка змінилась ");
+
+            this.setState((prevState) => ({
+              dataPic: [...prevState.dataPic, ...data.hits],
+              status: "resolved",
+            }));
+          } else {
+            // Якщо змінилася picName (новий пошук), перезаписуємо дані
+            this.setState({
+              dataPic: data.hits,
+              status: "resolved",
+            });
+          }
         })
-        .catch((error) => this.setState({ error: error, status: "rejected" }))
+        .catch((error) => {
+          console.log(error);
+
+          return this.setState({ error: error, status: "rejected" });
+        })
         .finally();
     }
   }
@@ -41,10 +59,6 @@ class PicDataView extends Component {
   };
 
   render() {
-    if (this.state.status === "pending") {
-      return <Loader />;
-    }
-
     if (this.state.status === "rejected") {
       return <div>{this.state.error.message}</div>;
     }
@@ -56,6 +70,9 @@ class PicDataView extends Component {
           <Button onLoadMore={this.handleLoadMore} />
         </>
       );
+    }
+    if (this.state.status === "pending") {
+      return <Loader />;
     }
   }
 }
