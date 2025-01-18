@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -13,45 +12,29 @@ const customStyles = {
     padding: "0",
     border: "0",
   },
-
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.54)",
+    backgroundColor: "rgba(0, 0, 0, 0.32)",
   },
 };
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+// Make sure to bind modal to your appElement
 Modal.setAppElement("#root");
 
-function Modale({ largeImg }) {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+function Modale({ largeImg, closeModal }) {
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div>
-          <img src={largeImg} alt="" />
-        </div>
-      </Modal>
-    </div>
+    <Modal
+      isOpen={true}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="Image Modal"
+    >
+      <div>
+        <img src={largeImg} alt="" style={{ width: "100%" }} />
+        <button onClick={closeModal} style={{ marginTop: "10px" }}>
+          Close
+        </button>
+      </div>
+    </Modal>
   );
 }
 
