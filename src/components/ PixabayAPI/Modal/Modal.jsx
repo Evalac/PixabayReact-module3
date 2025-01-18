@@ -10,14 +10,19 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    padding: "0",
+    border: "0",
+  },
+
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.54)",
   },
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
-function Modale() {
-  let subtitle;
+function Modale({ largeImg }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -43,7 +48,7 @@ function Modale() {
         contentLabel="Example Modal"
       >
         <div>
-          <img src="" alt="" />
+          <img src={largeImg} alt="" />
         </div>
       </Modal>
     </div>
